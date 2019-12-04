@@ -1,0 +1,49 @@
+version: '3'
+
+volumes:
+  mongodb_data: {}
+  redis_data: {}
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - .:/usr/src
+      - /usr/app/node_modules
+    environment:
+      REDIS_URL: redis://redis
+      MONGODB_URI_LOCAL: mongodb://test-user:secret@db:27017/test-db
+      SESSION_SECRET: ashdfjhasdlkjfhalksdjhflak
+      FACEBOOK_ID: 754220301289665
+      FACEBOOK_SECRET: 41860e58c256a3d7ad8267d3c1939a4a
+    restart: always
+
+  db:
+    image: mongo:4.2
+    volumes:
+      - mongodb_data:/data/db
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin-user
+      MONGO_INITDB_ROOT_PASSWORD: secret
+      MONGO_INITDB_DATABASE: test-db
+    healthcheck:
+      test: mongo ping
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+  redis:
+    image: redis:5.0.4
+    volumes:
+      - redis_data:/var/lib/redis/data
+    healthcheck:
+      test: redis-cli ping
+      interval: 2s
+      timeout: 3s
+      retries: 30

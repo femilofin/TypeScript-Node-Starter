@@ -39,10 +39,9 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useCreateIndex: true } ).the
     // process.exit();
 });
 
-
 // Connect to Redis server
 const RedisStore = connectRedis(session);
-const client = redis.createClient();
+const client = redis.createClient(process.env.REDIS_URL);
 
 
 // Express configuration
@@ -54,13 +53,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Add redis here
-app.use(session({
-    secret:"secret",
-    // store: new RedisStore({host: "127.0.0.1", port: 6379}),
-    store: new RedisStore({client}),
-    resave: false,
-    saveUninitialized: false
-}));
+// app.use(session({
+//     secret:"secret",
+//     // store: new RedisStore({host: "redis", port: 6379}),
+//     store: new RedisStore({client}),
+//     resave: false,
+//     saveUninitialized: false
+// }));
 
 app.use(session({
     resave: true,

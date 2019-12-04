@@ -29,7 +29,7 @@ We will try to keep this as up-to-date as possible, but community contributions 
 	- [`devDependencies`](#devdependencies)
 - [Hackathon Starter Project](#hackathon-starter-project)
 
-# Pre-reqs
+# Pre-reqs without docker
 To build and run this app locally you will need a few things:
 - Install [Node.js](https://nodejs.org/en/)
 - Install [MongoDB](https://docs.mongodb.com/manual/installation/)
@@ -68,6 +68,15 @@ Throughout the README We will try to call out specific places where VS Code real
 
 Finally, navigate to `http://localhost:3000` and you should see the template being served and rendered locally!
 
+# Pre-reqs with docker
+To build and run this app locally with docker, you need the following:
+- Install [Docker](https://docs.docker.com/install/)
+- Install [Docker Compose](https://docs.docker.com/v17.09/compose/install/)
+
+# Running with docker
+```
+docker-compose up
+```
 # Deploying the app
 There are many ways to deploy an Node app, and in general, nothing about the deployment process changes because you're using TypeScript.
 In this section, I'll walk you through how to deploy this app to Azure App Service using the extensions available in VS Code because I think it is the easiest and fastest way to get started, as well as the most friendly workflow from a developer's perspective.
