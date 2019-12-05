@@ -1,4 +1,4 @@
-sudo: false
+sudo: required
 language: node_js
 node_js:
     - "8"
@@ -8,15 +8,17 @@ python:
   - '3.5'
 services:
     - mongodb
+    - redis-server
     - docker
 cache:
     directories:
         - node_modules
+install:
+  - npm install
+  - sudo $(which pip) install ecs-deploy
 script:
     - npm run build
     - npm run test
-install:
-  - sudo pip3 install ecs-deploy
 deploy:
   - provider: script
     script: ./scripts/deploy.sh
