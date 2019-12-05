@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 set -e
 
+export AWS_DEFAULT_REGION="eu-west-1"
+
 COMMIT="$TRAVIS_COMMIT"
 BRANCH="$TRAVIS_BRANCH"
-AWS_DEFAULT_REGION="eu-west-1"
 IMAGE_REPO="506127536868.dkr.ecr.eu-west-1.amazonaws.com"
 APP="typescript-node-starter"
 
@@ -20,7 +21,7 @@ if [[ $TRAVIS_PULL_REQUEST == "false" ]]; then
   echo build app image
   docker-compose build app
 
-  $(aws ecr get-login --region="$AWS_DEFAULT_REGION" --no-include-email)
+  $(aws ecr get-login --no-include-email)
 
   echo tag and push app image
   docker tag $APP "$IMAGE_REPO/$APP-$ENV:latest"
