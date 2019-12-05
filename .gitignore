@@ -39,3 +39,10 @@ dist/**/*
 
 # ignore yarn.lock
 yarn.lock
+
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*

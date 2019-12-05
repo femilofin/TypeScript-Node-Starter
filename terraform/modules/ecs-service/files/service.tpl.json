@@ -1,0 +1,70 @@
+[
+  {
+    "name": "${app}",
+    "image": "${image_url}",
+    "cpu": 1,
+    "memory": ${application_memory},
+    "essential": true,
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "${log_group}",
+        "awslogs-region": "eu-west-1",
+        "awslogs-stream-prefix": "${app}"
+      }
+    },
+    "environment": [
+      {
+        "name": "NODE_ENV",
+        "value": "production"
+      },
+      {
+        "name": "REDIS_URL",
+        "value": "${REDIS_URL}"
+      },
+      {
+        "name": "MONGODB_URI",
+        "value": "${MONGODB_URI}"
+      },
+      {
+        "name": "SESSION_SECRET",
+        "value": "${SESSION_SECRET}"
+      },
+      {
+        "name": "FACEBOOK_ID",
+        "value": "${FACEBOOK_ID}"
+      },
+      {
+        "name": "FACEBOOK_SECRET",
+        "value": "${FACEBOOK_SECRET}"
+      }
+    ],
+    "placementStrategy": [
+      {
+        "field": "memory",
+        "type": "binpack"
+      }
+    ]
+  },
+  {
+    "name": "${app}-nginx",
+    "image": "${nginx_image_url}",
+    "cpu": 1,
+    "memory": 64,
+    "essential": true,
+    "links": [
+      "${app}"
+    ],
+    "portMappings": [
+      {
+        "containerPort": 80
+      }
+    ],
+    "placementStrategy": [
+      {
+        "field": "memory",
+        "type": "binpack"
+      }
+    ]
+  }
+]
