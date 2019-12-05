@@ -90,13 +90,12 @@ data "template_file" "ecs_template" {
     app                        = var.app
     project                    = var.project
     env                        = var.environment
-    log_group = var.cluster_name
-    REDIS_URL = var.REDIS_URL
-    MONGODB_URI = var.MONGODB_URI
-    SESSION_SECRET = var.SESSION_SECRET
-    FACEBOOK_ID = var.FACEBOOK_ID
-    FACEBOOK_SECRET = var.FACEBOOK_SECRET
-
+    log_group                  = var.cluster_name
+    REDIS_URL                  = var.REDIS_URL
+    MONGODB_URI                = var.MONGODB_URI
+    SESSION_SECRET             = var.SESSION_SECRET
+    FACEBOOK_ID                = var.FACEBOOK_ID
+    FACEBOOK_SECRET            = var.FACEBOOK_SECRET
   }
 }
 
