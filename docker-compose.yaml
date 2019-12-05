@@ -7,6 +7,7 @@ volumes:
 services:
   app:
     build: .
+    image: typescript-node-starter
     ports:
       - "3000:3000"
     depends_on:
@@ -16,6 +17,7 @@ services:
       - .:/usr/src
       - /usr/app/node_modules
     environment:
+      NODE_ENV: development
       REDIS_URL: redis://redis
       MONGODB_URI_LOCAL: mongodb://test-user:secret@db:27017/test-db
       SESSION_SECRET: ashdfjhasdlkjfhalksdjhflak
