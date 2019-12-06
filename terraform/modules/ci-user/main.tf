@@ -1,6 +1,7 @@
 resource "aws_iam_user" "ci_user" {
   name = "${var.project}-${var.app}-${var.environment}-user"
   path = "/ecs/"
+  force_destroy = true
 }
 
 data "template_file" "ci_user_policy" {

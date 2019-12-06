@@ -78,7 +78,6 @@ resource "aws_launch_configuration" "lc" {
 }
 
 resource "aws_autoscaling_group" "asg" {
-  availability_zones        = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
   name                      = var.cluster_name
   desired_capacity          = var.desired_capacity
   min_size                  = var.desired_capacity
