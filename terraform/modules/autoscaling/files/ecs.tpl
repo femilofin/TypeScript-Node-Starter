@@ -5,6 +5,7 @@ Description=ECS agent
 Environment=ECS_CLUSTER=${cluster_name}
 Environment=ECS_LOGLEVEL=info
 Environment=ECS_VERSION=latest
+Environment=ECS_ENABLE_AWSLOGS_EXECUTIONROLE_OVERRIDE
 
 Restart=on-failure
 RestartSec=30
