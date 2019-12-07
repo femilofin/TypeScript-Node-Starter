@@ -65,6 +65,13 @@ module "ecs-service" {
   FACEBOOK_SECRET    = var.FACEBOOK_SECRET
 }
 
+module "ecs-dashboard" {
+  source       = "../modules/ecs-dashboard"
+  cluster_name = var.cluster_name
+  service_name = "${var.project}-${var.app}"
+  environment = var.environment
+}
+
 module "ci-user" {
   source      = "../modules/ci-user"
   environment = var.environment

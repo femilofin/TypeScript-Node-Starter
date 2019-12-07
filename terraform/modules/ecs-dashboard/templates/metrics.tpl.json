@@ -1,0 +1,50 @@
+{
+  "widgets": [
+    {
+      "type": "metric",
+      "x": 0,
+      "y": 0,
+      "width": 12,
+      "height": 6,
+      "properties": {
+        "metrics": [
+          [
+            "AWS/ECS",
+            "MemoryUtilization",
+            "ClusterName",
+            "${cluster_name}",
+            "ServiceName",
+            "${service_name}"
+          ]
+        ],
+        "period": 300,
+        "stat": "Average",
+        "region": "eu-west-1",
+        "title": "Container Memory Utilization for ${service_name}"
+      }
+    },
+     {
+      "type": "metric",
+      "x": 0,
+      "y": 0,
+      "width": 12,
+      "height": 6,
+      "properties": {
+        "metrics": [
+          [
+            "AWS/ECS",
+            "CPUUtilization",
+            "ClusterName",
+            "${cluster_name}",
+            "ServiceName",
+            "${service_name}"
+          ]
+        ],
+        "period": 300,
+        "stat": "Average",
+        "region": "eu-west-1",
+        "title": "Container CPU Utilization for ${service_name}"
+      }
+    }
+  ]
+}
