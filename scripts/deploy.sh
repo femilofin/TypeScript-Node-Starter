@@ -7,7 +7,6 @@ COMMIT="$TRAVIS_COMMIT"
 BRANCH="$TRAVIS_BRANCH"
 IMAGE_REPO="506127536868.dkr.ecr.eu-west-1.amazonaws.com"
 APP="typescript-node-starter"
-CONTAINER_NAME="starter"
 
 case "$BRANCH" in
     feature/work-sample)
@@ -37,5 +36,5 @@ if [[ $TRAVIS_PULL_REQUEST == "false" ]]; then
   docker push "$IMAGE_REPO/$APP-nginx-$ENV:latest"
 
   echo deploy a new version of the service
-  ecs deploy --timeout 900 $CLUSTER_NAME-$ENV $APP -i $CONTAINER_NAME "$IMAGE_REPO/$APP-$ENV:$COMMIT"
+  ecs deploy --timeout 900 $CLUSTER_NAME-$ENV $APP
 fi
