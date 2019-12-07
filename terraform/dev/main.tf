@@ -20,6 +20,11 @@ module "bastion" {
   public_subnets = module.vpc.public_subnets
 }
 
+module "acm" {
+  source = "../modules/acm"
+  domain = var.domain
+}
+
 module "ecs" {
   source          = "../modules/ecs-cluster"
   environment     = var.environment
@@ -29,6 +34,7 @@ module "ecs" {
   private_subnets = module.vpc.private_subnets
   public_subnets  = module.vpc.public_subnets
   domain          = var.domain
+  certificate_arn = module.acm.certificate_arn
 }
 
 module "elasticache" {

@@ -10,11 +10,6 @@ data "aws_route53_zone" "domain" {
   name = "${var.domain}."
 }
 
-data "aws_acm_certificate" "cert" {
-  domain   = "*.${var.domain}"
-  statuses = ["ISSUED"]
-}
-
 resource "aws_route53_record" "record" {
   zone_id = data.aws_route53_zone.domain.zone_id
   name    = "${var.url}.${var.domain}"

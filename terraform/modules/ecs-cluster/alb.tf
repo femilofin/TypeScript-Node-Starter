@@ -74,18 +74,12 @@ resource "aws_alb_listener" "http" {
   }
 }
 
-data "aws_acm_certificate" "https" {
-  domain      = "*.${var.domain}"
-  types       = ["AMAZON_ISSUED"]
-  most_recent = true
-}
-
 resource "aws_alb_listener" "https" {
   load_balancer_arn = aws_alb.alb.arn
   port              = "443"
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-2015-05"
-  certificate_arn   = data.aws_acm_certificate.https.arn
+  certificate_arn   = var.certificate_arn
 
   default_action {
     target_group_arn = aws_alb_target_group.default.id

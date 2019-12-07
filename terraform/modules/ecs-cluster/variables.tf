@@ -21,3 +21,5 @@ variable "public_subnets" {
   type = list(string)
 }
 
+variable "certificate_arn" {
+}
