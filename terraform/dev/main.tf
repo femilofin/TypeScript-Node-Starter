@@ -58,7 +58,7 @@ module "ecs-service" {
   vpc_id             = module.vpc.vpc_id
   cluster_name       = var.cluster_name
   ecs_iam_role       = module.ecs.ecs_iam_role
-  REDIS_URL          = module.elasticache.address
+  REDIS_URL          = "redis://${module.elasticache.address}"
   MONGODB_URI        = var.MONGODB_URI
   SESSION_SECRET     = var.SESSION_SECRET
   FACEBOOK_ID        = var.FACEBOOK_ID

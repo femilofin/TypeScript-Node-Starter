@@ -14,6 +14,15 @@ resource "aws_security_group_rule" "bastion" {
   source_security_group_id = var.bastion_sg_id
 }
 
+resource "aws_security_group_rule" "redis" {
+  type                     = "ingress"
+  protocol                 = "tcp"
+  from_port                = 6379
+  to_port                  = 6379
+  security_group_id        = aws_security_group.internal.id
+  source_security_group_id = aws_security_group.internal.id
+}
+
 output "internal_sg_id" {
   value = aws_security_group.internal.id
 }
