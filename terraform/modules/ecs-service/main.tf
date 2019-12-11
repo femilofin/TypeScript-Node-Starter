@@ -123,3 +123,15 @@ resource "aws_ecs_service" "service" {
     container_port   = 80
   }
 }
+
+output "app_repository_url" {
+  value = aws_ecr_repository.repository.repository_url
+}
+
+output "nginx_repository_url" {
+  value = aws_ecr_repository.repository_nginx.repository_url
+}
+
+output "service_name" {
+  value = aws_ecs_service.service.name
+}

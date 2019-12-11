@@ -38,3 +38,9 @@ variable "MONGODB_URI" {}
 variable "SESSION_SECRET" {}
 variable "FACEBOOK_ID" {}
 variable "FACEBOOK_SECRET" {}
+variable "repo_name" {}
+variable "repo_owner" {}
+variable "branch" {}
+variable "region" {}
+variable "github_token" {}
+variable "webhook_secret_token" {}

@@ -1,6 +1,11 @@
 provider "aws" {
-  region = "eu-west-1"
+  region  = "eu-west-1"
   version = "2.41.0"
+}
+
+provider "github" {
+  token        = var.github_token
+  organization = var.repo_owner
 }
 
 module "vpc" {
@@ -75,20 +80,31 @@ module "ecs-dashboard" {
   source       = "../modules/ecs-dashboard"
   cluster_name = var.cluster_name
   service_name = "${var.project}-${var.app}"
-  environment = var.environment
+  environment  = var.environment
 }
 
-module "ci-user" {
-  source      = "../modules/ci-user"
-  environment = var.environment
-  project     = var.project
-  app         = var.app
+module "code-build" {
+  source               = "../modules/code-build"
+  project              = var.project
+  region               = var.region
+  repository_url       = module.ecs-service.app_repository_url
+  nginx_repository_url = module.ecs-service.nginx_repository_url
+  ecs_cluster_name     = var.cluster_name
+  domain               = var.domain
 }
 
-output "ci_user_access_key" {
-  value = module.ci-user.ci_user_access_key
-}
-
-output "ci_user_secret_key" {
-  value = module.ci-user.ci_user_secret_key
+module "code-pipeline" {
+  source                  = "../modules/code-pipeline"
+  repo_owner              = var.repo_owner
+  repo_name               = var.repo_name
+  branch                  = var.branch
+  github_token            = var.github_token
+  code_build_project_name = module.code-build.name
+  cluster_name            = var.cluster_name
+  service_name            = module.ecs-service.service_name
+  project                 = var.project
+  app                     = var.app
+  artifacts_bucket        = module.code-build.artifacts_bucket
+  artifacts_bucket_arn    = module.code-build.artifacts_bucket_arn
+  webhook_secret_token    = var.webhook_secret_token
 }

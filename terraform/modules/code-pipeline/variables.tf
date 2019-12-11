@@ -1,0 +1,12 @@
+variable "project" {}
+variable "repo_owner" {}
+variable "repo_name" {}
+variable "branch" {}
+variable "code_build_project_name" {}
+variable "github_token" {}
+variable "cluster_name" {}
+variable "service_name" {}
+variable "artifacts_bucket" {}
+variable "artifacts_bucket_arn" {}
+variable "app" {}
+variable "webhook_secret_token" {}
